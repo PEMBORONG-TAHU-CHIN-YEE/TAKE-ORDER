@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>锦亿豆腐批发商 - 客户下单页</title>
+<style>
+  body {
+    font-family: "Microsoft YaHei", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+  }
+
+  /* 顶部信头区域 */
+  .header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: white;
+    border-bottom: 3px solid #0078d7;
+  }
+
+  .logo {
+    width: 120px;
+    height: 120px;
+    background-color: #ccc;
+    border-radius: 10px;
+    margin-right: 20px;
+    flex-shrink: 0;
+  }
+
+  .company-info {
+    line-height: 1.6;
+  }
+
+  .company-info h1 {
+    font-size: 20px;
+    margin: 0;
+    color: #0078d7;
+  }
+
+  .company-info p {
+    margin: 2px 0;
+  }
+
+  /* 欢迎框 */
+  .welcome-box {
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 15px 20px;
+    border: 2px solid #0078d7;
+    border-radius: 10px;
+    background-color: #e8f3ff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #0078d7;
+  }
+
+  /* 表格样式 */
+  table {
+    width: 95%;
+    margin: 0 auto 40px auto;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #0078d7;
+    color: white;
+  }
+
+  .product-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .product-img {
+    width: 60px;
+    height: 60px;
+    background-color: #eee;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .subtotal {
+    text-align: right;
+    width: 95%;
+    margin: 10px auto;
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  .confirm-text {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 16px;
+    color: #333;
+  }
+
+  .submit-btn {
+    display: block;
+    margin: 10px auto 40px auto;
+    padding: 12px 30px;
+    font-size: 18px;
+    color: white;
+    background-color: #0078d7;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .submit-btn:hover {
+    background-color: #005fa3;
+  }
+
+  /* 响应式调整 */
+  @media (max-width: 768px) {
+    .header {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .logo {
+      margin-bottom: 10px;
+    }
+
+    .product-cell {
+      flex-direction: column;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <!-- 信头 -->
+  <div class="header">
+    <div class="logo">LOGO</div>
+    <div class="company-info">
+      <h1>锦亿豆腐批发商 （01234789-REG)</h1>
+      <p>PEMBORONG TAHU CHIN YEE</p>
+      <p>NO 35，JALAN SATRIA 7, TAMAN JB PERDANA, 81300 SKUDAI, JOHOR BAHRU, JOHOR.</p>
+      <p>TEL : 07-5126085 / 016-7585432</p>
+      <p>SST : 01234567891011123</p>
+    </div>
+  </div>
+
+  <!-- 欢迎框 -->
+  <div class="welcome-box">Welcome Jessie To Place Order</div>
+
+  <!-- 表格 -->
+  <table id="orderTable">
+    <thead>
+      <tr>
+        <th>NO.</th>
+        <th>PRODUCT</th>
+        <th>PRICE</th>
+        <th>QUANTITY</th>
+        <th>TOTAL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- 数据行 -->
+    </tbody>
+  </table>
+
+  <div class="subtotal">SUB-TOTAL: RM <span id="subtotalValue">0.00</span></div>
+
+  <p class="confirm-text">请在下单之前确认数量。</p>
+  <button class="submit-btn" id="submitBtn">SUBMIT ORDER</button>
+
+<script>
+  // 产品资料
+  const products = [
+    { name: "大豆干 (BIG BEANCURD)", price: 1.20 },
+    { name: "小豆干 (SMALL BEANCURD)", price: 0.50 },
+    { name: "油豆腐 (OIL BEANCURD)", price: 0.80 },
+    { name: "豆卜 KG (DOU BO-KG)", price: 1.50 },
+    { name: "豆卜 - 12粒 (DOU BO 12NOS)", price: 1.80 },
+    { name: "豆卜 - 串 (DOU BO - IKAT)", price: 1.00 },
+    { name: "炸豆腐 - 小 (TAUHU GORENG KECIL)", price: 1.00 },
+    { name: "条状油豆腐 (BATANG OIL BEANCURD)", price: 2.00 },
+  ];
+
+  const tbody = document.querySelector("#orderTable tbody");
+
+  products.forEach((p, i) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${i + 1}</td>
+      <td class="product-cell">
+        <img src="https://via.placeholder.com/60" alt="product" class="product-img">
+        <span>${p.name}</span>
+      </td>
+      <td>RM ${p.price.toFixed(2)}</td>
+      <td><input type="number" min="0" value="0" step="1" class="qty-input" style="width:60px;text-align:center;"></td>
+      <td class="total-cell">RM 0.00</td>
+    `;
+    tbody.appendChild(row);
+  });
+
+  const qtyInputs = document.querySelectorAll(".qty-input");
+  const subtotalEl = document.getElementById("subtotalValue");
+
+  qtyInputs.forEach((input, index) => {
+    input.addEventListener("input", () => {
+      const qty = parseFloat(input.value) || 0;
+      const total = qty * products[index].price;
+      tbody.rows[index].querySelector(".total-cell").textContent = `RM ${total.toFixed(2)}`;
+
+      let subtotal = 0;
+      document.querySelectorAll(".total-cell").forEach(td => {
+        subtotal += parseFloat(td.textContent.replace("RM", "")) || 0;
+      });
+      subtotalEl.textContent = subtotal.toFixed(2);
+    });
+  });
+
+  // 提交按钮（目前先只是展示功能）
+  document.getElementById("submitBtn").addEventListener("click", () => {
+    alert("订单已准备提交（下次我们会连接 Google Sheet）！");
+  });
+</script>
+
+</body>
+</html>
