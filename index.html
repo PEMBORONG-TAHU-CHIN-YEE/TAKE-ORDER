@@ -19,6 +19,9 @@
     padding: 20px;
     background-color: white;
     border-bottom: 3px solid #0078d7;
+    width: 95%;
+    margin: 0 auto;
+    box-sizing: border-box;
   }
 
   .logo {
@@ -58,8 +61,8 @@
 
   /* 欢迎框 */
   .welcome-box {
+    width: 95%;
     margin: 20px auto;
-    max-width: 600px;
     padding: 15px 20px;
     border: 2px solid #0078d7;
     border-radius: 10px;
@@ -69,6 +72,7 @@
     font-size: 18px;
     font-weight: bold;
     color: #0078d7;
+    box-sizing: border-box;
   }
 
   /* 表格样式 */
@@ -142,10 +146,30 @@
     .header {
       flex-direction: column;
       text-align: center;
+      width: 100%;
+      border-radius: 0;
+      margin: 0;
     }
 
     .logo {
-      margin-bottom: 10px;
+      margin: 0 auto 10px auto;
+    }
+
+    .welcome-box {
+      width: 100%;
+      border-radius: 0;
+      margin: 0;
+    }
+
+    table {
+      width: 100%;
+      margin: 0;
+      border-radius: 0;
+    }
+
+    .subtotal {
+      width: 100%;
+      padding-right: 10px;
     }
 
     .product-cell {
@@ -185,9 +209,7 @@
         <th>TOTAL</th>
       </tr>
     </thead>
-    <tbody>
-      <!-- 数据行 -->
-    </tbody>
+    <tbody></tbody>
   </table>
 
   <div class="subtotal">SUB-TOTAL: RM <span id="subtotalValue">0.00</span></div>
@@ -196,7 +218,6 @@
   <button class="submit-btn" id="submitBtn">SUBMIT ORDER</button>
 
 <script>
-  // 产品资料
   const products = [
     { name: "大豆干 (BIG BEANCURD)", price: 1.20, img: "data:image/png;base64,PLACEHOLDER1" },
     { name: "小豆干 (SMALL BEANCURD)", price: 0.50, img: "data:image/png;base64,PLACEHOLDER2" },
@@ -252,5 +273,3 @@
 
 </body>
 </html>
-
-
